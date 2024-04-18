@@ -5,11 +5,13 @@ import { securePage } from "@/services/securePage";
 import { useEffect, useState } from "react";
 import { getCompanies } from "@/services/getCompanies";
 import { deleteCompany } from "@/services/deleteCompany";
+import { ImageInput } from "@/components/ImageInput";
 
 export default securePage(function Dashboard() {
   const supabase = useSupabaseClient();
   const router = useRouter();
   const user = useUser();
+  const [imageUrl, setImageUrl] = useState("0.1466368422093962.jpg");
 
   const [companies, setCompanies] = useState([]);
   useEffect(() => {
@@ -41,6 +43,10 @@ export default securePage(function Dashboard() {
           </li>
         ))}
       </ul>
+      <p>
+        <b>{imageUrl}</b>
+      </p>
+      <ImageInput bucket="pictures" value={imageUrl} onChange={setImageUrl} />
     </div>
   );
 });
