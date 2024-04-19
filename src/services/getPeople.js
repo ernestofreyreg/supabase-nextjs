@@ -9,3 +9,12 @@ export async function getCountries(supabase) {
   let { data: countries, error } = await supabase.from("countries").select("*");
   return countries;
 }
+
+export async function getPerson(supabase, id) {
+  let { data: person, error } = await supabase
+    .from("people")
+    .select("*, countries(*)")
+    .eq("id", id)
+    .single();
+  return person;
+}
